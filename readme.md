@@ -48,5 +48,5 @@ const decoded = jsonCodec.parse(encoded);
 ## Other codecs
 
 - [@skyrpex/string-codec](https://github.com/skyrpex/string-codec)
-- [@skyrpex/devalue-codec](https://github.com/skyrpex/devalue-codec)
-- [@skyrpex/superjson-codec](https://github.com/skyrpex/superjson-codec)
+- [devalue-codec](https://github.com/skyrpex/devalue-codec)
+- [json-codec](https://github.com/skyrpex/json-codec)
