@@ -34,15 +34,13 @@ npm install superjson-codec
 ## Usage
 
 ```ts
-import * as jsonCodec from "superjson-codec";
+import * as codec from "superjson-codec";
 
-const encoded = jsonCodec.stringify({
+const encoded = codec.stringify({
 	key: "value",
 });
-// encoded = "{"key":"value"}"
 
-const decoded = jsonCodec.parse(encoded);
-// decoded = { key: "value" }
+const decoded = codec.parse(encoded);
 ```
 
 ## Other codecs
