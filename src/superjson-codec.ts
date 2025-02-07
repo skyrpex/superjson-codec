@@ -1,7 +1,9 @@
-import type { Opaque } from "opaque-type";
+import { parser, stringifier } from "codec-builder";
 import * as superjson from "superjson";
 
-export type SuperjsonSerializablePrimitive =
+export type { Stringified } from "codec-builder";
+
+export type Serializable =
 	| string
 	| number
 	| boolean
@@ -22,30 +24,19 @@ export type SuperjsonSerializablePrimitive =
 	| undefined
 	| null;
 
-export interface SuperjsonSerializableRecord {
-	[key: string]:
-		| SuperjsonSerializablePrimitive
-		| SuperjsonSerializablePrimitive[]
-		| SuperjsonSerializableRecord
-		| SuperjsonSerializableRecord[];
-}
+// biome-ignore lint/complexity/noBannedTypes: we need to forbid Function
+type Forbidden = symbol | Function;
 
-export type SuperjsonSerializable =
-	| SuperjsonSerializablePrimitive
-	| SuperjsonSerializablePrimitive[]
-	| SuperjsonSerializableRecord
-	| SuperjsonSerializableRecord[];
-
+/**
+ * Serializes a {@link Serializable} object to a string.
+ */
 // @__NO_SIDE_EFFECTS__
-export const stringify = <T extends SuperjsonSerializable>(value: T) =>
-	superjson.stringify(value) as SuperjsonEncoded<T>;
+export const stringify = stringifier<Serializable, Forbidden>(
+	superjson.stringify,
+);
 
+/**
+ * Parses a stringified {@link Serializable} object to its original value.
+ */
 // @__NO_SIDE_EFFECTS__
-export const parse = <T extends SuperjsonSerializable>(
-	json: SuperjsonEncoded<T>,
-) => superjson.parse(json) as T;
-
-declare const type: unique symbol;
-export type SuperjsonEncoded<
-	T extends SuperjsonSerializable = SuperjsonSerializable,
-> = Opaque<string, { readonly [type]: T }>;
+export const parse = parser<Serializable>(superjson.parse);
