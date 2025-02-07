@@ -2,7 +2,7 @@
 
 Uses [superjson](https://github.com/flightcontrolhq/superjson) to serialize expressions while retaining the original object type.
 
-Accepts the following primitives, including arrays and objects:
+Accepts the following values, including arrays and objects:
 
 - `string`
 - `number`
@@ -34,13 +34,13 @@ npm install superjson-codec
 ## Usage
 
 ```ts
-import * as codec from "superjson-codec";
+import { stringify, parse } from "superjson-codec";
 
-const encoded = codec.stringify({
+const encoded = stringify({
 	key: "value",
 });
 
-const decoded = codec.parse(encoded);
+const decoded = parse(encoded);
 ```
 
 ## Other codecs
