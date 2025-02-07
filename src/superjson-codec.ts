@@ -1,9 +1,9 @@
-import { parser, stringifier } from "codec-builder";
+import { type SerializableRecord, parser, stringifier } from "codec-builder";
 import * as superjson from "superjson";
 
 export type { Stringified } from "codec-builder";
 
-export type Serializable =
+export type SerializablePrimitive =
 	| string
 	| number
 	| boolean
@@ -24,19 +24,21 @@ export type Serializable =
 	| undefined
 	| null;
 
+export type Serializable = SerializableRecord<SerializablePrimitive>;
+
 // biome-ignore lint/complexity/noBannedTypes: we need to forbid Function
 type Forbidden = symbol | Function;
 
 /**
- * Serializes a {@link Serializable} object to a string.
+ * Serializes a {@link SerializablePrimitive} object to a string.
  */
 // @__NO_SIDE_EFFECTS__
-export const stringify = stringifier<Serializable, Forbidden>(
+export const stringify = stringifier<SerializablePrimitive, Forbidden>(
 	superjson.stringify,
 );
 
 /**
- * Parses a stringified {@link Serializable} object to its original value.
+ * Parses a stringified {@link SerializablePrimitive} object to its original value.
  */
 // @__NO_SIDE_EFFECTS__
-export const parse = parser<Serializable>(superjson.parse);
+export const parse = parser<SerializablePrimitive>(superjson.parse);

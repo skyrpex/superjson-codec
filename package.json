@@ -14,7 +14,7 @@
 		"test": "vitest --typecheck"
 	},
 	"dependencies": {
-		"codec-builder": "^1.0.1",
+		"codec-builder": "^1.1.0",
 		"superjson": "^2.2.2"
 	},
 	"devDependencies": {
