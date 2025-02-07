@@ -1,6 +1,6 @@
 {
 	"name": "superjson-codec",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"description": "Safely serialize expressions to a superset of JSON, which includes Dates, BigInts, and more, while retaining the original object type",
 	"author": {
 		"name": "Cristian Pallarés",
